@@ -1,0 +1,50 @@
+.chat-item {
+  display: flex;
+  //   justify-content: space-between;
+  border: 1px solid #ebeef5;
+  .el-badge {
+    margin: 11px;
+  }
+  .el-avatar {
+    // margin: 8px;
+    padding: 8px;
+    height: 46px;
+    width: 46px;
+  }
+  .el-badge__content.is-fixed {
+    top: 10px;
+    left: -26px;
+    right: unset;
+  }
+  .rsvt_time {
+    font-size: 13px;
+    color: #999999;
+  }
+  .status {
+    width: 50px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    width: 100px;
+    color: #999999;
+  }
+  .chat-item-layout {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    // width: 100%;
+    .name {
+      font-size: 15px;
+      margin-right: 8px;
+    }
+  }
+}
+// .el-collapse.chat-item-collapse {
+//   .el-collapse-item__content {
+//     overflow-y: auto;
+//   }
+// }
+.el-collapse-item__content {
+  padding-bottom: 0px;
+}

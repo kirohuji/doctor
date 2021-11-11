@@ -1,0 +1,118 @@
+.chat-card {
+  margin: 16px;
+  border: 1px solid #ebeef5;
+  border-radius: 16px;
+  background-color: rgba(247, 248, 250, 1);
+  width: 100%;
+  position: relative;
+  .chat-card-header {
+    height: 120px;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0);
+    padding: 16px;
+    .header-layout {
+      display: flex;
+    }
+    .info-layout {
+      margin-left: 16px;
+    }
+  }
+  .chat-card-body {
+    margin: 16px;
+    height: 100%;
+    .infinite-chat-list {
+      height: calc(100% - 357px);
+      list-style-type: none;
+      padding: 0;
+      .infinite-chat-list-item {
+        margin: 8px 0px;
+        // max-width: 50%;
+        .chat-message-body-main {
+          display: flex;
+          .chat-message {
+            margin-left: 16px;
+            border-radius: 8px;
+            padding: 8px 16px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            &:before {
+              position: absolute;
+              top: 10px;
+              content: "";
+
+              width: 0px;
+              height: 0px;
+              font-size: 0;
+              border: solid 8px;
+            }
+          }
+          &.to_patient {
+            .chat-message::before {
+              border-color: #f7f8fa #fff #f7f8fa #f7f8fa;
+              left: -16px; /* 圆角的位置需要细心调试哦 */
+            }
+          }
+          &.to_doctor {
+            flex-direction: row-reverse;
+            margin-right: 16px;
+            .chat-message {
+              margin-right: 16px;
+            }
+            .chat-message::before {
+              border-color: #f7f8fa #f7f8fa #f7f8fa #fff;
+              right: -16px; /* 圆角的位置需要细心调试哦 */
+            }
+          }
+        }
+      }
+    }
+  }
+  .chat-card-footer {
+    position: absolute;
+    width: calc(100% - 32px);
+    height: 200px;
+    bottom: 0px;
+    margin: 16px;
+    .message-toolbar {
+      .el-tag {
+        padding: 1px 2px !important;
+        margin: 0px 4px;
+        line-height: 20px;
+        height: 22px;
+        background-color: white;
+        border-color: #8e8e8e;
+        color: #8e8e8e;
+        cursor: pointer;
+      }
+    }
+    .message-control {
+      display: flex;
+      height: calc(100% - 34px);
+      margin-top: 8px;
+      background-color: #fff;
+      border: 1px solid #e4e4e4;
+      background: #fff;
+      border-radius: 8px;
+      .wait_intalk {
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+      .info-layout {
+        padding: 16px;
+        width: 100%;
+        background-color: rgba(243, 250, 255, 1);
+      }
+      .el-textarea__inner {
+        height: 100%;
+        border: none;
+        border-radius: 8px;
+      }
+      .el-button {
+        width: calc(100% - 32px);
+        margin: 8px 16px;
+      }
+    }
+  }
+}
