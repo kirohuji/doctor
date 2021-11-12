@@ -10,6 +10,7 @@ export default {
         use: "input",
         prop: "name",
         size: "small",
+        class: "form-item-block",
         required: true,
       },
       {
@@ -17,6 +18,7 @@ export default {
         use: "input",
         prop: "name",
         size: "small",
+        class: "form-item-block",
         required: true,
       },
       {
@@ -24,6 +26,7 @@ export default {
         use: "input",
         prop: "name",
         size: "small",
+        class: "form-item-block",
         required: true,
       },
       {
@@ -31,6 +34,7 @@ export default {
         use: "input",
         prop: "name",
         size: "small",
+        class: "form-item-block",
         required: true,
       },
       {
@@ -56,6 +60,7 @@ export default {
         use: "input",
         prop: "name",
         type: "textarea",
+        class: "form-item-block",
         size: "small",
         required: true,
       },
@@ -64,6 +69,7 @@ export default {
         use: "input",
         prop: "name",
         type: "textarea",
+        class: "form-item-block",
         size: "small",
         required: true,
       },

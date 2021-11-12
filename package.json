@@ -11,7 +11,7 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.3.6",
     "lodash": "^4.17.21",
-    "lourd-components": "^0.1.91",
+    "lourd-components": "^0.1.93",
     "moment": "^2.29.1",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",

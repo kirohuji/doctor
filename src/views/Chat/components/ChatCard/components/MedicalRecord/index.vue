@@ -6,7 +6,7 @@
       <Label label="就诊科室:" value="(互)妇科门诊" />
     </div>
     <DataForm v-bind="form" />
-    <div>
+    <div class="medical-footer">
       <Button size="small">暂存</Button>
       <Button type="primary" size="small">立即创建</Button>
     </div>
@@ -40,5 +40,6 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  padding: 16px 0px;
 }
 </style>

@@ -6,7 +6,11 @@
     </Card>
     <Card style="margin-top: 8px"> 风险预警 </Card>
     <div style="margin: 16px; display: flex">
-      <PatientCard />
+      <PatientCard
+        :patient="patient"
+        v-for="(patient, index) in patients"
+        :key="index"
+      />
     </div>
   </div>
 </template>
@@ -43,7 +47,7 @@ export default {
         target: "patients",
         runner: patientService.find.bind(patientService),
         immediate: true,
-        callback: (res) => res.data,
+        callback: (res) => res,
       };
     },
   },

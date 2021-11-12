@@ -116,6 +116,7 @@ export default {
       switch (event) {
         case "medicalRecord":
           this.dialog.title = "写病历";
+          this.dialog.customClass = "medical-record-class";
           this.$refs.baseDialog.open();
           this.dialog.type = event;
           break;

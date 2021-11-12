@@ -9,7 +9,9 @@ const BaseInfo = ({ props: { gender, age } }) => (
   </span>
 );
 export const PatientCard = {
+  props: ["paitent"],
   render() {
+    // debugger;
     return (
       <Card class="patient-card">
         <div class="avatar-info">
@@ -17,18 +19,18 @@ export const PatientCard = {
           <Link size="mini">取消关注</Link>
         </div>
         <div>
-          <span class="name">詹梦琪</span>
+          <span class="name">{this.patient.patient_realname}</span>
           <BaseInfo
             {...{
               props: {
-                gender: "女",
-                age: "75",
+                gender: this.patient.patient_realname,
+                age: this.patient.patient_realname,
               },
             }}
           />
           <div class="patient-info">
-            <Label label="电话:" value="13177778888" />
-            <Label label="关注时间:" value="2021-05-09" />
+            <Label label="电话:" value={this.patient.patient_realname} />
+            <Label label="关注时间:" value={this.patient.patient_realname} />
             <Label label="关注原因:" value="给患者开检验检查，等待结果" />
             <Label label="病历更新状态:" value="08/05新增病历" />
             <Label label="随访信息:" value="无新增随访结果" />
