@@ -16,7 +16,7 @@ export default {
       {
         label: "现病史",
         use: "input",
-        prop: "name",
+        prop: "phi",
         size: "small",
         class: "form-item-block",
         required: true,
@@ -24,7 +24,7 @@ export default {
       {
         label: "过敏史",
         use: "input",
-        prop: "name",
+        prop: "allergic_history",
         size: "small",
         class: "form-item-block",
         required: true,
@@ -32,7 +32,7 @@ export default {
       {
         label: "过敏史",
         use: "input",
-        prop: "name",
+        prop: "gws",
         size: "small",
         class: "form-item-block",
         required: true,
@@ -76,7 +76,7 @@ export default {
       {
         label: "患者去向",
         use: "select",
-        prop: "name",
+        prop: "hzqx",
         required: true,
         children: () => {
           return {
