@@ -27,6 +27,17 @@
     font-size: 13px;
     width: 100px;
     color: #999999;
+    position: relative;
+    .online::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 100%;
+      background-color: #008dff;
+      content: "";
+      position: absolute;
+      top: 35%;
+      left: 50%;
+    }
   }
   .chat-item-layout {
     font-size: 13px;
@@ -45,6 +56,9 @@
 //     overflow-y: auto;
 //   }
 // }
+.chat-item-collapse {
+  height: calc(100vh - 136px);
+}
 .el-collapse-item__content {
   padding-bottom: 0px;
 }

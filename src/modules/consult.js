@@ -19,4 +19,19 @@ export class ConsultService {
       params: target,
     });
   }
+  skip(target) {
+    return this.api.post(`/${this.module}/skip`, target);
+  }
+  complete(target) {
+    return this.api.post(`/${this.module}/complete`, target);
+  }
+  reception(target) {
+    return this.api.post(`/${this.module}/reception`, target);
+  }
+  refuse(target) {
+    return this.api.post(`/${this.module}/refuse`, target);
+  }
+  next(target) {
+    return this.api.post(`/${this.module}/next`, target);
+  }
 }

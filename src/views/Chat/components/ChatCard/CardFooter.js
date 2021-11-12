@@ -1,11 +1,62 @@
-import { Input, Button, Tag } from "element-ui";
+import { Input, Button, Tag, Dialog, Divider, Radio } from "element-ui";
 import { mapState } from "vuex";
+import { consultService } from "./service";
+// import { Button, Input, Dialog } from "element-ui";
 const Label = ({ props: { label, value } }) => (
   <span style="margin: 0 8px">
     <span>{label}</span>
     <span>{value}</span>
   </span>
 );
+const NotifyDialog = {
+  props: ["patient"],
+  data() {
+    return {
+      message: "",
+      notifyVisible: false,
+      index: "1",
+    };
+  },
+  methods: {
+    toggle(visible) {
+      this.notifyVisible = visible;
+    },
+  },
+  render() {
+    return (
+      <Dialog
+        visible={this.notifyVisible}
+        {...{
+          props: {
+            customClass: "notify-dialog",
+            appendToBody: true,
+          },
+          scopedSlots: {
+            title: () => (
+              <div>
+                <Radio vModel={this.index} label="1" border>
+                  签到提醒
+                </Radio>
+                <Radio vModel={this.index} label="2" border>
+                  就诊提醒
+                </Radio>
+                <Divider />
+              </div>
+            ),
+          },
+          on: {
+            "update:visible": (val) => (this.notifyVisible = val),
+          },
+        }}
+      >
+        <Input type="textarea" placeholder="请填写内容" vModel={this.message} />
+        <div class="notify-buttons">
+          <Button onClick={() => (this.notifyVisible = false)}>发送</Button>
+        </div>
+      </Dialog>
+    );
+  },
+};
 const BaseInfo = ({ props: { gender, age, content } }) => (
   <span>
     <span style="font-size: 12px;margin: 8px">
@@ -27,14 +78,25 @@ export default {
   computed: {
     ...mapState(["work"]),
   },
+  methods: {
+    reception() {
+      consultService.reception({
+        consult_id: this.patient.consult_id,
+      });
+    },
+    notifyDialogOpen() {
+      this.$refs.notifyDialog.toggle(true);
+    },
+  },
   render() {
     return (
       <div class="chat-card-footer">
+        <NotifyDialog patient={this.patient} ref="notifyDialog" />
         <div class="message-toolbar">
           <Tag>发图片</Tag>
           <Tag>语音视频</Tag>
           <Tag>常用语</Tag>
-          <Tag>消息提醒</Tag>
+          <Tag onClick={() => this.notifyDialogOpen()}>消息提醒</Tag>
           <Tag>电话通知</Tag>
         </div>
         {/** 候诊 && 团队 */}
@@ -55,7 +117,11 @@ export default {
                 width: "200px",
               }}
             >
-              <Button type="primary" size="small">
+              <Button
+                type="primary"
+                size="small"
+                onClick={() => this.reception()}
+              >
                 接诊
               </Button>
             </div>
@@ -69,22 +135,48 @@ export default {
         !this.confirm ? (
           <div class="message-control">
             <div class="info-layout">
-              <span class="name">詹梦琪</span>
-              <BaseInfo gender="女" age="75" />
+              <span class="name">{this.patient.patient_realname}</span>
+              <BaseInfo
+                gender={this.patient.patient_gender}
+                age={this.patient.patient_age}
+              />
             </div>
             <div
               style={{
                 background: this.status === 2 && "rgba(243, 250, 255, 1)",
-                display: "flex",
-                alignItems: "center",
-                width: "400px",
               }}
             >
-              <Button type="primary" size="small">
+              <Button
+                type="primary"
+                size="small"
+                onClick={() => this.reception()}
+              >
                 优先接诊
               </Button>
               <Button type="primary" size="small">
-                邀请详细描述症状
+                邀请详情描述症状
+              </Button>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+        {/** 回诊  */}
+        {this.patient.custom_status === "end" && !this.confirm ? (
+          <div class="message-control">
+            <div
+              style={{
+                background: this.status === 2 && "rgba(243, 250, 255, 1)",
+                width: "100%",
+              }}
+            >
+              <Button
+                type="primary"
+                size="small"
+                style="width: 120px;position: absolute; right: 0;margin: 8px;"
+                onClick={() => (this.confirm = false)}
+              >
+                回诊
               </Button>
             </div>
           </div>
@@ -116,13 +208,14 @@ export default {
         ) : (
           ""
         )}
+        {/**  提醒 */}
         {this.confirm ? (
           <div class="message-control">
             <div class="info-layout">
-              <span class="name">詹梦琪</span>
+              <span class="name">{this.patient.patient_realname}</span>
               <BaseInfo
-                gender="女"
-                age="75"
+                gender={this.patient.patient_gender}
+                age={this.patient.patient_age}
                 content="为避免看诊错误，切换就诊人前请先了解下患者"
               />
             </div>

@@ -17,6 +17,7 @@ import Card from "@/components/atoms/Card";
 import config from "./config";
 import { Button } from "element-ui";
 import { PatientCard } from "./components";
+import { patientService } from "./service";
 export default {
   components: {
     DataSearchForm,
@@ -33,7 +34,18 @@ export default {
           name: "测试",
         },
       },
+      patients: [],
     };
+  },
+  thenable: {
+    patientData() {
+      return {
+        target: "patients",
+        runner: patientService.find.bind(patientService),
+        immediate: true,
+        callback: (res) => res.data,
+      };
+    },
   },
 };
 </script>

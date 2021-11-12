@@ -1,5 +1,12 @@
-import { Avatar, Badge, Link, Collapse, CollapseItem } from "element-ui";
-// import { consultService } from "../service";
+import {
+  Avatar,
+  Badge,
+  Link,
+  Collapse,
+  CollapseItem,
+  Button,
+} from "element-ui";
+import { consultService } from "../service";
 import { mapState } from "vuex";
 import "./style.scss";
 // import _ from "lodash";
@@ -78,7 +85,9 @@ const ChatItem = {
           <div class="rsvt_time">预约时间:{this.rsvt_time}</div>
           <div class="status">
             <span>{this.is_signin ? "已签到" : "未签到"}</span>
-            <span>{this.is_online ? "在线" : "不在线"}</span>
+            <span class={`${this.is_online && "online"}`}>
+              {this.is_online ? "在线" : "不在线"}
+            </span>
           </div>
         </div>
       </div>
@@ -106,23 +115,41 @@ export default {
     };
   },
   computed: {
-    ...mapState(["work", "chat"]),
+    ...mapState(["work", "chat", "patient"]),
+  },
+  methods: {
+    next() {
+      consultService.next().then((res) => {
+        console.log(res);
+      });
+    },
   },
   render() {
     return (
-      <Collapse vModel={this.collapse.active} class="chat-item-collapse">
-        {Object.keys(this.chat).map((key) => (
-          <CollapseItem name={key} title={this.chatType.get(key)}>
-            {this.chat[key].map((item) => (
-              <ChatItem
-                {...{
-                  props: item,
-                }}
-              />
-            ))}
-          </CollapseItem>
-        ))}
-      </Collapse>
+      <div>
+        <Collapse vModel={this.collapse.active} class="chat-item-collapse">
+          {Object.keys(this.chat).map((key) => (
+            <CollapseItem
+              name={key}
+              title={`${this.chatType.get(key)}(${this.chat[key].length})`}
+            >
+              {this.chat[key].map((item) => (
+                <ChatItem
+                  {...{
+                    props: item,
+                  }}
+                />
+              ))}
+            </CollapseItem>
+          ))}
+        </Collapse>
+        <Button
+          style="width: 100%;position: absolute;bottom: 0px"
+          onClick={() => this.next()}
+        >
+          下一位
+        </Button>
+      </div>
     );
   },
 };

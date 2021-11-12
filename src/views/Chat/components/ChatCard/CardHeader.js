@@ -10,8 +10,8 @@ const operation = [
   { label: "写病历", type: "primary", event: "medicalRecord" },
   { label: "开处方", type: "success", event: "prescription" },
   { label: "开医技", type: "success", event: "medicalTechnical" },
-  { label: "过号", type: "warning" },
-  { label: "结束会诊", type: "danger" },
+  { label: "过号", type: "warning", event: "skip" },
+  { label: "结束会诊", type: "danger", event: "complete" },
 ];
 // 基本信息
 const BaseInfo = ({ props: { gender, age, phone, card } }) => (

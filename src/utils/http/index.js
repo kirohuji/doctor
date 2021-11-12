@@ -1,7 +1,7 @@
 import axios from "axios";
 import { findIndex } from "lodash";
 // import { DonMessage } from "@/components/atoms/DonMessage";
-// import { Message } from 'element-ui'
+import { Message } from "element-ui";
 // import router from "@/router";
 // import qs from 'qs'
 // Full config:  https://github.com/axios/axios#request-config
@@ -115,7 +115,9 @@ _axios.interceptors.response.use(
   (err) => {
     if (axios.isCancel(err)) {
       console.log("repeated request: " + err.message || err.msg);
+      return;
     }
+    Message.error(err.response.data.errmsg);
     return Promise.reject(err);
   }
 );

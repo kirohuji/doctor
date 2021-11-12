@@ -1,7 +1,9 @@
 <template>
   <div class="nav-bar">
     <div class="info-layout">
-      <div style="margin: 0 16px"><Avatar :src="circleUrl" /></div>
+      <div style="margin: 0 16px">
+        <Avatar :src="circleUrl" />
+      </div>
       <OutpatientButtons />
       <RouterMenu />
     </div>
@@ -9,7 +11,8 @@
       <div class="info-layout" style="width: 200px">
         <Avatar :src="doctor.avatar_url" />
         <span>{{ doctor.doctor_name }}医生</span>
-        <span>在线</span>
+
+        <StatusButton />
       </div>
       <Button size="small" type="primary">刷新</Button>
       <Button size="small" type="danger">退出诊室</Button>
@@ -21,6 +24,7 @@
 import { Avatar, Button } from "element-ui";
 import OutpatientButtons from "./components/OutpatientButtons.vue";
 import RouterMenu from "./components/RouterMenu.vue";
+import StatusButton from "./components/StatusButton.vue";
 import { mapState } from "vuex";
 export default {
   components: {
@@ -28,6 +32,7 @@ export default {
     Button,
     OutpatientButtons,
     RouterMenu,
+    StatusButton,
   },
   computed: {
     ...mapState(["doctor"]),

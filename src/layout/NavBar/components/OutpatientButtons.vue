@@ -33,6 +33,14 @@ export default {
   computed: {
     ...mapState(["otpts"]),
   },
+  watch: {
+    /** 默认 */
+    otpts(val) {
+      if (val) {
+        this.change(this.otpts[0], 0);
+      }
+    },
+  },
   methods: {
     change(item, index) {
       this.active = index;
